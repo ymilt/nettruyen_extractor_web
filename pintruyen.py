@@ -1,5 +1,4 @@
 from hashlib import md5
-from typing import Literal
 from urllib.parse import quote
 import json
 
@@ -177,7 +176,7 @@ class API:
                 position = None, 
                 genres: list[int] = None, 
                 not_genres: list[int] = None, 
-                gender: Literal["Boy"] | Literal["Girl"] = None, 
+                gender: str = None, 
                 status: int = None, 
                 minchapter: int = None, 
                 sort: int = None
