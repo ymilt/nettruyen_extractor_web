@@ -11,39 +11,40 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous" async></script>
         <!-- END BOOTSTRAP COMPONENTS -->
         <script>
+            function sendReq(e) {
+                submit_btn.disabled = true, submit_spin.style = '';
+
+                var email = getElem("email").value,
+                    pass = getElem("password").value;
+
+                fetch("/api/follows", {
+                    method: "POST",
+                    credentials: "same-origin",
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    redirect: "follow",
+                    body: "e=" + encodeURIComponent(email) + "&p=" + encodeURIComponent(password),
+                }).then(r => r.arrayBuffer().then(data => {
+                    submit_btn.disabled = false, submit_spin.style = "display: none;";
+
+                    getElem("resultContent").innerText = new TextDecoder("utf-8").decode(pako.inflate(data));
+                    const modal = new bootstrap.Modal(getElem('resultModal'), {
+                        backdrop: 'static',
+                        focus: true,
+                        keyboard: false
+                    });
+                    modal.show();
+                }));
+            };
             window.onload = (e) => {
                 var getElem = document.getElementById.bind(document);
 
-                var form = getElem("upload"),
-                    submit_btn = getElem("submit_btn"),
-                    submit_spin = getElem("submit_spin");
+                var form = getElem("upload");
+                window.submit_btn = getElem("submit_btn"),
+                window.submit_spin = getElem("submit_spin");
 
-                form.onsubmit = (e) => {
-                    submit_btn.disabled = true, submit_spin.style = '';
-
-                    var email = getElem("email").value,
-                        pass = getElem("password").value;
-
-                    fetch("/api/follows", {
-                        method: "POST",
-                        credentials: "same-origin",
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded',
-                        },
-                        redirect: "follow",
-                        body: "e=" + encodeURIComponent(email) + "&p=" + encodeURIComponent(password),
-                    }).then(r => r.arrayBuffer().then(data => {
-                        submit_btn.disabled = false, submit_spin.style = "display: none;";
-
-                        getElem("resultContent").innerText = new TextDecoder("utf-8").decode(pako.inflate(data));
-                        const modal = new bootstrap.Modal(getElem('resultModal'), {
-                            backdrop: 'static',
-                            focus: true,
-                            keyboard: false
-                        });
-                        modal.show();
-                    }));
-                };
+                form.onsubmit = submit_btn.onclick = sendReq;
             }
         </script>
     </head>
