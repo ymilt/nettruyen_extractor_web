@@ -43,7 +43,7 @@
                 }));
             };
             window.onload = (e) => {
-                var getElem = document.getElementById.bind(document);
+                window.getElem = document.getElementById.bind(document);
 
                 var form = getElem("upload"),
                     submit_btn = getElem("submit");
