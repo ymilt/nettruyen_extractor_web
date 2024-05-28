@@ -34,7 +34,7 @@ function sendReq(e) {
         toggleButton(false);
 
         var content;
-        if (data.length == 0){
+        if (data.byteLength == 0){
             content = "Tải danh sách thất bại";
         }else{
             try {
