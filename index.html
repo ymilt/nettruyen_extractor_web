@@ -92,10 +92,11 @@ window.onload = (e) => {
             <br/><br/>
             <h1>Tải Danh Sách Theo Dõi</h1>
             <br/><br/><br/>
-            <form id="form1" class="needs-validation" novalidates>
+            <form id="form1" class="needs-validation" novalidate>
                 <div class="form-floating mb-3">
                     <input type="email" class="form-control" id="email" placeholder="name@example.com" required>
                     <label for="email">Email address</label>
+                    <div class="invalid-feedback">Xin hãy nhập vào email</div>
                 </div>
                 <div class="form-floating mb-3">
                     <input type="password" class="form-control" id="password" placeholder="Password" required>
@@ -104,6 +105,7 @@ window.onload = (e) => {
                 <button class="btn btn-primary" type="submit" id="submit">
                     <span id="submit_spin" style="display: none;" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                     <span id="submit_text" class="sr-only">Lấy Danh Sách</span>
+                    <div class="invalid-feedback">Mật khẩu không được để trống</div>
                 </button>
             </form>
             <br/><br/><br/>
