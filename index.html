@@ -14,8 +14,13 @@
             window.onload = (e) => {
                 var getElem = document.getElementById.bind(document);
 
-                var form = getElem("upload");
+                var form = getElem("upload"),
+                    submit_btn = getElem("submit_btn"),
+                    submit_spin = getElem("submit_spin");
+
                 form.onsubmit = (e) => {
+                    submit_btn.disabled = true, submit_spin.style = '';
+
                     var email = getElem("email").value,
                         pass = getElem("password").value;
 
@@ -28,6 +33,8 @@
                         redirect: "follow",
                         body: "e=" + encodeURIComponent(email) + "&p=" + encodeURIComponent(password),
                     }).then(r => r.arrayBuffer().then(data => {
+                        submit_btn.disabled = false, submit_spin.style = "display: none;";
+
                         getElem("resultContent").innerText = new TextDecoder("utf-8").decode(pako.inflate(data));
                         const modal = new bootstrap.Modal(getElem('resultModal'), {
                             backdrop: 'static',
@@ -56,7 +63,7 @@
                 </div>
                 <button class="btn btn-primary" type="button" id="submit">
                     <span id="submit_spin" style="display: none;" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                    <span id="submit_text" class="sr-only"></span>
+                    <span id="submit_text" class="sr-only">Lấy Danh Sách</span>
                 </button>
             </form>
             <br/><br/><br/>
