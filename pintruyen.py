@@ -459,7 +459,7 @@ class Session:
     def initApp(self) -> bool:
         return API.Comic.initApp(self.user.guid, self.user.token)
     
-    def markAsRead(self, comic_id: int, chapter_ids: list|str) -> bool:
+    def markAsRead(self, comic_id: int, chapter_ids) -> bool:
         if not isinstance(chapter_ids, str):
             chapter_ids = ",".join(map(str, chapter_ids))
         return API.Comic.markAsRead(self.user.guid, comic_id, chapter_ids)
