@@ -33,7 +33,18 @@ function sendReq(e) {
     }).then(r => r.arrayBuffer().then(data => {
         toggleButton(false);
 
-        getElem("resultContent").innerText = new TextDecoder("utf-8").decode(pako.inflate(data));
+        var content;
+        if (data.length == 0){
+            content = "Tải danh sách thất bại";
+        }else{
+            try {
+                content = new TextDecoder("utf-8").decode(pako.inflate(data));
+            } catch (e) {
+                content = "Có lỗi xảy ra trong quá trình tải danh sách";
+            }
+        }
+
+        getElem("resultContent").innerText = content;
         const modal = new bootstrap.Modal(getElem('resultModal'), {
             backdrop: 'static',
             focus: true,
