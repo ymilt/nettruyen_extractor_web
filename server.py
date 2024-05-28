@@ -32,7 +32,7 @@ def api(command):
 
     response = response.encode()
 
-    response = Response(gzip.compress(response)) if response else ""
+    response = Response(gzip.compress(response) if response else "")
 
     response.headers["Access-Control-Allow-Origin"] = "https://netext.vercel.app/"
             
