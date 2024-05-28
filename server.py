@@ -2,24 +2,15 @@ from globs import *
 from werkzeug.utils import secure_filename
 from flask import Flask, request, Response, send_file
 
-import os, gzip
-import gzip
-import backend
+import gzip, backend
 
 
 app = Flask(__name__)
 
 
-@app.route('/js/<name>', methods=["GET", "POST"])
-def script(name):
-    resp = send_file(os.path.join("./js/", secure_filename(name)))
-    resp.headers["Access-Control-Allow-Origin"] = "https://netext.vercel.app/"
-    
-    return resp
-
 @app.route('/', methods=["GET"])
 def index():
-    return ''
+    return send_file('index.html')
 
 @app.route('/api/<command>', methods=["OPTIONS"])
 def api_opt_cors(command):
@@ -41,6 +32,6 @@ def api(command):
 
     response = Response(gzip.compress(response.encode()))
 
-    response.headers["Access-Control-Allow-Origin"] = "https://ygo.helioho.st"
+    response.headers["Access-Control-Allow-Origin"] = "https://netext.vercel.app/"
             
     return response
