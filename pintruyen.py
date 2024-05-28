@@ -17,11 +17,11 @@ except:
 
     def get(*args, **kwargs):
         kwargs.pop("timeout", None)
-        return requests.Session.get(*args, **kwargs)
+        return tls_client.Session.get(*args, **kwargs)
     
     def post(*args, **kwargs):
         kwargs.pop("timeout", None)
-        return requests.Session.get(*args, **kwargs)    
+        return tls_client.Session.get(*args, **kwargs)    
 
 sess.get = get
 sess.post = post
