@@ -56,10 +56,29 @@ function sendReq(e) {
 window.onload = (e) => {
     window.getElem = document.getElementById.bind(document);
 
-    var form = getElem("upload"),
+    var form = getElem("form1"),
         submit_btn = getElem("submit");
 
     form.onsubmit = submit_btn.onclick = sendReq;
+
+    (() => {
+        'use strict'
+      
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        const forms = document.querySelectorAll('.needs-validation')
+      
+        // Loop over them and prevent submission
+        Array.from(forms).forEach(form => {
+            form.onsubmit = function(event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopImmediatePropagation();
+                }
+            
+                form.classList.add('was-validated');
+            }
+        });
+    })();
 }
         </script>
         <style>
@@ -74,13 +93,13 @@ window.onload = (e) => {
             <br/><br/>
             <h1>Tải Danh Sách Theo Dõi</h1>
             <br/><br/><br/>
-            <form id="upload">
+            <form id="form1" class="needs-validation" novalidates>
                 <div class="form-floating mb-3">
-                    <input type="email" class="form-control" id="email" placeholder="name@example.com">
+                    <input type="email" class="form-control" id="email" placeholder="name@example.com" required>
                     <label for="email">Email address</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <input type="password" class="form-control" id="password" placeholder="Password">
+                    <input type="password" class="form-control" id="password" placeholder="Password" required>
                     <label for="password">Password</label>
                 </div>
                 <button class="btn btn-primary" type="button" id="submit">
