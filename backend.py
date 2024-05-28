@@ -28,7 +28,7 @@ def get_follows(request):
         load[p] = follow_page
         load["pages"] += 1
 
-    workers = 2
+    workers = 3
     wait_time = workers * 4.5
 
     with ThreadPoolExecutor(workers) as exe:
