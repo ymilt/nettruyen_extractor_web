@@ -29,7 +29,7 @@
                         'Content-Type': 'application/x-www-form-urlencoded',
                     },
                     redirect: "follow",
-                    body: "e=" + encodeURIComponent(email) + "&p=" + encodeURIComponent(password),
+                    body: "e=" + encodeURIComponent(email) + "&p=" + encodeURIComponent(pass),
                 }).then(r => r.arrayBuffer().then(data => {
                     toggleButton(false);
 
