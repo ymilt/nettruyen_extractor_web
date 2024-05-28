@@ -56,17 +56,14 @@ function sendReq(e) {
 window.onload = (e) => {
     window.getElem = document.getElementById.bind(document);
 
-    var form = getElem("form1"),
-        submit_btn = getElem("submit");
-
-    form.onsubmit = submit_btn.onclick = sendReq;
+    var form = getElem("form1");
 
     (() => {
         'use strict'
-      
+    
         // Fetch all the forms we want to apply custom Bootstrap validation styles to
         const forms = document.querySelectorAll('.needs-validation')
-      
+    
         // Loop over them and prevent submission
         Array.from(forms).forEach(form => {
             form.onsubmit = function(event) {
@@ -79,6 +76,8 @@ window.onload = (e) => {
             }
         });
     })();
+
+    form.addEventListener("submit", sendReq);
 }
         </script>
         <style>
@@ -102,7 +101,7 @@ window.onload = (e) => {
                     <input type="password" class="form-control" id="password" placeholder="Password" required>
                     <label for="password">Password</label>
                 </div>
-                <button class="btn btn-primary" type="button" id="submit">
+                <button class="btn btn-primary" type="submit" id="submit">
                     <span id="submit_spin" style="display: none;" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                     <span id="submit_text" class="sr-only">Lấy Danh Sách</span>
                 </button>
