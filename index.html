@@ -17,6 +17,7 @@ function toggleButton(load){
     else submit_btn.disabled = false, submit_spin.style = "display: none;";
 }
 function sendReq(e) {
+    e.preventDefault();
     toggleButton(true);
 
     var email = getElem("email").value,
