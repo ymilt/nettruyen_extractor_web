@@ -4,31 +4,28 @@ from urllib.parse import quote
 import json
 
 try:
-    try:
-        from curl_cffi import requests
-        sess = requests.Session()
+    from curl_cffi import requests
+    sess = requests.Session()
 
-        def get(*args, **kwargs):
-            return requests.Session.get(sess, *args, impersonate=kwargs.pop("impersonate", "chrome124"), **kwargs)
-        
-        def post(*args, **kwargs):
-            return requests.Session.get(sess, *args, impersonate=kwargs.pop("impersonate", "chrome124"), **kwargs)
-    except:
-        import tls_client
-        sess = tls_client.Session("firefox_120")
-
-        def get(*args, **kwargs):
-            kwargs.pop("timeout", None)
-            return requests.Session.get(*args, **kwargs)
-        
-        def post(*args, **kwargs):
-            kwargs.pop("timeout", None)
-            return requests.Session.get(*args, **kwargs)    
-
-    sess.get = get
-    sess.post = post
+    def get(*args, **kwargs):
+        return requests.Session.get(sess, *args, impersonate=kwargs.pop("impersonate", "chrome124"), **kwargs)
+    
+    def post(*args, **kwargs):
+        return requests.Session.get(sess, *args, impersonate=kwargs.pop("impersonate", "chrome124"), **kwargs)
 except:
-    sess = object()
+    import tls_client
+    sess = tls_client.Session("firefox_120")
+
+    def get(*args, **kwargs):
+        kwargs.pop("timeout", None)
+        return requests.Session.get(*args, **kwargs)
+    
+    def post(*args, **kwargs):
+        kwargs.pop("timeout", None)
+        return requests.Session.get(*args, **kwargs)    
+
+sess.get = get
+sess.post = post
 
 _type = type
 
